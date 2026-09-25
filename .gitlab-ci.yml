@@ -1,0 +1,8 @@
+stages:
+  - test
+
+baseline:
+  stage: test
+  image: alpine:3.20
+  script:
+    - echo BASELINE_PIPELINE
