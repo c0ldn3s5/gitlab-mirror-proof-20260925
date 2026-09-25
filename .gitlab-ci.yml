@@ -1,8 +1,14 @@
 stages:
   - test
 
-baseline:
+canary_check:
   stage: test
   image: alpine:3.20
   script:
-    - echo BASELINE_PIPELINE
+    - |
+      if [ -n "${RESEARCH_CANARY:-}" ]; then
+        printf 'CANARY_SHA256='
+        printf '%s' "$RESEARCH_CANARY" | sha256sum | cut -d' ' -f1
+      else
+        echo CANARY_ABSENT
+      fi
